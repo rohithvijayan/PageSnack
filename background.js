@@ -17,7 +17,9 @@ document.addEventListener('DOMContentLoaded',function(){
         })
         .then((response) => response.json())
         .then((data) => {
-        const summaryElement = document.getElementById('summary');
+        const title=document.getElementById('title');
+        title.innerText=data.title
+        const summaryElement = document.getElementById('summary-text');
         if (summaryElement) {
             summaryElement.textContent = data.summary;
         } else {
