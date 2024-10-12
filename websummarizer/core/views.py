@@ -1,7 +1,6 @@
 from django.shortcuts import render,HttpResponse
 from django.http import JsonResponse
 from rest_framework.decorators import api_view
-from groq import Groq
 import google.generativeai as genai
 import os
 # Create your views here.
@@ -9,14 +8,12 @@ import os
 def home(request):
     #print("IT is there")
     #print("THIS IS LINE 2:::",request.data)
-    if request.method=="POST":
-        #print("ENTERED")
-        content=request.data
-        #print(content)
-        summary=summarizer(content)
-    return HttpResponse("data obtained")
-    if request.method=='GET':
-        return JsonResponse({'title':"WebSummarizer",'summary':summary})
+	#print("ENTERED")
+	content=request.data.get('content')
+	#print(content)
+	summary=summarizer(content)
+	return JsonResponse({'title':"WebSummarizer",'summary':summary})
+
 
 def summarizer(content):
     genai.configure(api_key=os.environ["API_KEY"])
@@ -43,5 +40,20 @@ def summarizer(content):
         - The rise of ethical AI is crucial for widespread adoption.
         - AI may lead to job automation, creating both opportunities and challenges.
         """
-    summary=model.generate_content(f'I want you to act as a webpage summarizer. First, read the webpage thoroughly and identify the key ideas and themes. Then, follow these steps to generate a summary:Start by briefly identifying the main topic or purpose of the webpage.Focus on extracting the most important pieces of information or arguments, grouping related points together.For each topic, provide a clear and concise statement that captures the essence of the idea.Make sure the points are independent, and do not overlap with each other.Ensure that the summary is presented in the form of 3 to 6 key points.Avoid unnecessary details, focusing only on what is most relevant to the user.Present the points in a clean, plain-text format without any symbols, bullet points, or asterisks,there should be maximum of 2 detail for each point.Use plain text and follow this structure:{response_format}INPUT={content}').text
-    print(summary)
+    summary=model.generate_content(f""""II want you to act as a webpage summarizer. Please follow these steps to generate a brief summary in HTML format:
+
+Read the Webpage: Analyze the webpage content to identify the most important headlines or key ideas that encapsulate the main message.
+
+Extract Core Information: Identify 2 to 4 essential pieces of information that provide context about the webpage. These should be concise and represent the core ideas.
+
+Structure the Response: Format the summary in HTML using the following structure:
+
+Create an unordered list with the <ul> tag.
+Use the <li> tag for each title or heading to maintain clarity and organization.
+Focus on Brevity: Avoid unnecessary details to ensure the summary is brief and clear.
+
+Stricly Avoid ```html  in the response.
+
+Finally, please summarize the following webpage, keeping these steps in mind.INPUT={content}""")
+    print(summary.text)
+    return summary.text

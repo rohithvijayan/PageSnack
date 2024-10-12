@@ -1,11 +1,10 @@
-function getPageContent() {
-  return document.body.innerText; // Fetches all text from the page
-}
+
+function getPageContent(){return document.body.innerText;}
 document.addEventListener('DOMContentLoaded',function(){
     chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
     chrome.scripting.executeScript({
         target: {tabId: tabs[0].id},
-        function: () => document.body.innerText,
+        function: getPageContent,
     }, (results) => {
         const pageContent = results[0].result;
         fetch('http://127.0.0.1:8000/api/home/', {
@@ -18,13 +17,17 @@ document.addEventListener('DOMContentLoaded',function(){
         .then((response) => response.json())
         .then((data) => {
         const title=document.getElementById('title');
-        title.innerText=data.title
+        const summaryDiv=document.getElementById("summary");
         const summaryElement = document.getElementById('summary-text');
-        if (summaryElement) {
-            summaryElement.textContent = data.summary;
-        } else {
-            console.error('Summary element not found');
-        }
+        
+        title.innerText=data.title
+        const btn=document.getElementById('sum-btn')
+        btn.addEventListener("click",()=>{
+                summaryDiv.innerHTML = data.summary;
+                console.log("clicked")
+
+        })
+        
         })
         .catch(error => {
         console.error('Error summarizing content:', error);
