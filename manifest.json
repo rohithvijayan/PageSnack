@@ -1,9 +1,10 @@
 {
-    "manifest_version":2,
+    "manifest_version":3,
     "name":"WebSummary",
     "description":"This a Simple Chrome Extension Where Users Can Get A Summary Of The Current Tab As Few Points Instead Of Reading The Entire Page",
     "version":"1.0",
-    "permissions":["activeTab","tabs","http://127.0.0.1:8000/"],
-    "background":{"scripts":["background.js"],"persistent":false},
-    "browser_action":{"default_popup":"popup.html"}
-}
+    "permissions":["activeTab","scripting","tabs"],
+    "host_permissions":["http://127.0.0.1:8000/"],
+    "background":{"service_worker":"background.js"},
+    "action":{"default_popup":"popup.html"}
+}   
