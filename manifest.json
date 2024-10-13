@@ -1,10 +1,13 @@
 {
     "manifest_version":3,
-    "name":"WebSummary",
+    "name":"PageSnack",
     "description":"This a Simple Chrome Extension Where Users Can Get A Summary Of The Current Tab As Few Points Instead Of Reading The Entire Page",
     "version":"1.0",
     "permissions":["activeTab","scripting","tabs"],
     "host_permissions":["http://127.0.0.1:8000/"],
     "background":{"service_worker":"background.js"},
-    "action":{"default_popup":"popup.html"}
+    "action":{"default_popup":"popup.html"},
+    "icons": { "16": "logo-16.png",
+           "48": "logo-48.png",
+          "128": "logo-128.png" }
 }   

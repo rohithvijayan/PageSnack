@@ -16,9 +16,10 @@ body {
 }
 
 #title {
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     font-size: 1.8rem;
     color: #3f51b5;
-    font-weight: 500;
+    font-weight: 1200;
     margin-bottom: 10px;
 }
 
@@ -50,10 +51,9 @@ hr {
     background-color: #303f9f;
     box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15);
 }
-
+*
 #summary {
-    min-width: 80% ;
-    min-height: 100%;
+   
     max-width: max-content;
     max-width: max-content;
     margin-left: auto;
@@ -63,7 +63,7 @@ hr {
     padding: 20px;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
     margin-top: 20px;
-    display: block;
+    display: contents;
     justify-content: space-evenly;
     
 
@@ -72,3 +72,45 @@ hr {
 #summary h2{font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;font-weight: bolder;font-size: larger;text-decoration: underline;text-align: center;}
 
 #summary li{color: rgb(21, 21, 133);font-weight: bold;font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;font-size: medium;text-align: left;}
+
+/* From Uiverse.io by barisdogansutcu */ 
+#loading{display: none;}
+svg {
+    width: 3.25em;
+    transform-origin: center;
+    animation: rotate4 2s linear infinite;
+   }
+   
+   circle {
+    fill: none;
+    stroke: hsl(214, 97%, 59%);
+    stroke-width: 2;
+    stroke-dasharray: 1, 200;
+    stroke-dashoffset: 0;
+    stroke-linecap: round;
+    animation: dash4 1.5s ease-in-out infinite;
+   }
+   
+   @keyframes rotate4 {
+    100% {
+     transform: rotate(360deg);
+    }
+   }
+   
+   @keyframes dash4 {
+    0% {
+     stroke-dasharray: 1, 200;
+     stroke-dashoffset: 0;
+    }
+   
+    50% {
+     stroke-dasharray: 90, 200;
+     stroke-dashoffset: -35px;
+    }
+   
+    100% {
+     stroke-dashoffset: -125px;
+    }
+   }
+   
+  
