@@ -1,4 +1,4 @@
-/* Reset some default styling */
+/* Reset some default styling 
 * {
     margin: 0;
     padding: 0;
@@ -73,7 +73,7 @@ hr {
 
 #summary li{color: rgb(21, 21, 133);font-weight: bold;font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;font-size: medium;text-align: left;}
 
-/* From Uiverse.io by barisdogansutcu */ 
+/* From Uiverse.io by barisdogansutcu 
 #loading{display: none;}
 svg {
     width: 3.25em;
@@ -112,5 +112,166 @@ svg {
      stroke-dashoffset: -125px;
     }
    }
-   
-  
+*/
+/* Import Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap');
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    background-color: #f4f7fc;
+    color: #333;
+}
+
+.container {
+    max-width: 600px;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Title Animation */
+h1#title {
+    font-size: 2.5rem;
+    color: #2c3e50;
+    text-align: center;
+    font-weight: 700;
+    margin-bottom: 10px;
+    opacity: 0;
+    transform: translateY(-50px);
+    animation: fade-slide-in 1s ease-in-out forwards;
+    transition: transform 0.3s ease, color 0.3s ease;  /* Add smooth transition for hover effects */
+}
+h1#title:hover {
+    transform: scale(1.1);  /* Slight scaling effect */
+    color: #3498db;         /* Color change on hover */
+}
+
+@keyframes fade-slide-in {
+    0% {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fade-slide-in {
+    0% {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+hr {
+    border: none;
+    height: 2px;
+    background-color: #2c3e50;
+    margin-bottom: 20px;
+}
+
+.btn {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Button Animation */
+.modern-btn {
+    background-color: #3498db;
+    color: #ffffff;
+    font-size: 1rem;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease-in-out;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    animation: bounce-in 1s ease forwards;
+    transform: scale(0.9);
+}
+
+.modern-btn:hover {
+    background-color: #2980b9;
+    transform: scale(1.05);
+}
+
+@keyframes bounce-in {
+    0% {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    60% {
+        transform: scale(1.1);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Summary Section */
+.summary ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.summary li {
+    font-size: 1.1rem;
+    margin: 10px 0;
+    line-height: 1.6;
+}
+
+/* Loading Spinner */
+.loading {
+
+    display: none;
+    margin-left: 0;
+    margin-right: 0;
+    position: fixed;
+    text-align: center;
+}
+
+.loading svg {
+    width: 50px;
+    height: 50px;
+    animation: rotate 2s linear infinite;
+}
+
+.loading circle {
+    stroke: #3498db;
+    stroke-width: 5;
+    stroke-dasharray: 90, 150;
+    stroke-dashoffset: 0;
+    fill: none;
+    animation: dash 1.5s ease-in-out infinite;
+}
+
+@keyframes rotate {
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes dash {
+    0% {
+        stroke-dasharray: 1, 200;
+        stroke-dashoffset: 0;
+    }
+    50% {
+        stroke-dasharray: 90, 150;
+        stroke-dashoffset: -40px;
+    }
+    100% {
+        stroke-dasharray: 90, 150;
+        stroke-dashoffset: -120px;
+    }
+}
+
