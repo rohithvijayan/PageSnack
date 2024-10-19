@@ -33,10 +33,10 @@ PageSnack uses intelligent natural language processing (NLP) to extract the most
 
                                                                                  
 **Summarizing a webpage**  
-![Screenshot from 2024-10-13 19-06-00](https://github.com/user-attachments/assets/342bd036-7c8f-4be4-9d9a-942cfa9023f2)
+![Screenshot from 2024-10-20 00-12-24](https://github.com/user-attachments/assets/7aa33059-c540-4f5c-9f57-85a1ab6f9f97)
                                           
         
-]![Screenshot from 2024-10-13 17-10-33](https://github.com/user-attachments/assets/9f2db7b6-f237-4953-bea9-abb2fef47e60)
+![Screenshot from 2024-10-20 00-12-59](https://github.com/user-attachments/assets/4e3fec16-87b9-48d2-8611-d2d0cc3a762c)
 
 ## Contributing 🤝                                                                                    
       
