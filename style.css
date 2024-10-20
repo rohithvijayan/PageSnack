@@ -135,6 +135,8 @@ body {
 #selection{margin-left: 0;margin-right: 0;text-align: center;display: none;
 min-width: fit-content;min-height: max-content;padding-top: -1px;}
 .quicksearch{padding: 0px;}
+#response-box{display: none;}
+#response-box li{text-align: left;font-weight: bold;font-size: medium;}
 /* Title Animation */
 h1#title {
     font-size: 2.5rem;

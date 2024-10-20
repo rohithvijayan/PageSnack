@@ -4,6 +4,8 @@ from rest_framework.decorators import api_view
 import google.generativeai as genai
 import os
 # Create your views here.
+genai.configure(api_key=os.environ["API_KEY"])
+model = genai.GenerativeModel("gemini-1.5-flash")
 @api_view(['GET','POST'])
 def home(request):
     #print("IT is there")
@@ -16,30 +18,6 @@ def home(request):
 
 
 def summarizer(content):
-    genai.configure(api_key=os.environ["API_KEY"])
-    model = genai.GenerativeModel("gemini-1.5-flash")
-    response_format="""
-    Response Example:
-        1. Introduction to AI:
-        - AI is a branch of computer science focused on creating intelligent systems.
-        - It involves machine learning, natural language processing, and robotics.
-        - AI has applications in various industries like healthcare, finance, and education.
-
-        2. Types of Machine Learning:
-        - Supervised, unsupervised, and reinforcement learning are the three main types.
-        - Supervised learning relies on labeled data for training models.
-        - Unsupervised learning is used when the data is not labeled, often for clustering.
-        
-        3. Challenges in AI Development:
-        - Lack of transparency in decision-making processes.
-        - Data bias can lead to unfair outcomes.
-        - High computational costs and resource consumption are major barriers.
-
-        4. Future of AI:
-        - AI is expected to revolutionize industries like transportation and healthcare.
-        - The rise of ethical AI is crucial for widespread adoption.
-        - AI may lead to job automation, creating both opportunities and challenges.
-        """
     summary=model.generate_content(
     f""""
         Here's a tweaked version of your template prompt that focuses on brevity, ensuring a quick response and adding the required line breaks for clarity:
@@ -55,3 +33,24 @@ def summarizer(content):
         """,safety_settings=None)
     print(summary.text)
     return summary.text
+
+def quickResponse(selection):
+    quick_Response=model.generate_content(f'''I want you to act as a Quick Search Engine. Follow these steps to generate a very brief Search Result in HTML format:
+        Analyze the Input :If the input is a normal word Search for  the meaning,if the input is a person/place/event/thing search for and identify the most important and relevant details and information.Extract Core Information: Select 1 to 3 essential pieces of information that represent the main ideas.
+        Format the Response:
+        Use <ul> for an unordered list.
+        Use <li> for each title, and insert a <br> after each <li> for spacing.
+        insert a <br> after each <li> for spacing
+        Focus on Brevity: Keep the summary short and clear. Avoid unnecessary details.
+        Strictly avoid using ```html in the response.
+        Now, Search the following item based on these steps.INPUT :{selection}
+        ''')
+    print(quick_Response.text)
+    return quick_Response.text
+@api_view(['POST', 'GET'])
+def quick_search(request):  
+    selection=request.data.get('selection')
+    print("QUICK SEARCH:::",selection)
+    response=quickResponse(selection)
+    return JsonResponse({'quickSearch':response})
+

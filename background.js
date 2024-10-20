@@ -30,13 +30,26 @@ chrome.tabs.query({active:true,currentWindow:true},function(tabs){
         if (selected_text){ 
             selectionDiv.style.display="block";
         }
-        fetch('http://127.0.0.1:8000/api/home/',
+        fetch('http://127.0.0.1:8000/api/quicksearch/',
             {
             method:'POST',
             body:JSON.stringify({'selection':selected_text}),
             headers: {
                 'Content-Type': 'application/json',
             },
+            })
+            .then((response) => response.json())
+            .then((data)=>{
+                let response=data.quickSearch
+                const responsebox=document.getElementById("response-box");
+                responsebox.innerHTML=response;
+                const searchbtn=document.getElementById("quick-btn");
+                searchbtn.addEventListener("click",function(){
+                    responsebox.style.display="block";
+                })
+                searchbtn.addEventListener("dblclick",function(){
+                    responsebox.style.display="none";
+                })
             })
     })
 })
