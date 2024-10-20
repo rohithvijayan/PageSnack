@@ -10,7 +10,7 @@ def home(request):
     #print("THIS IS LINE 2:::",request.data)
 	#print("ENTERED")
 	content=request.data.get('content')
-	print("POST CONTENT:",content)
+	#print("POST CONTENT:",content)
 	summary=summarizer(content)
 	return JsonResponse({'title':"WebSummarizer",'summary':summary})
 
@@ -40,26 +40,18 @@ def summarizer(content):
         - The rise of ethical AI is crucial for widespread adoption.
         - AI may lead to job automation, creating both opportunities and challenges.
         """
-    summary=model.generate_content(f""""
-Here's a tweaked version of your template prompt that focuses on brevity, ensuring a quick response and adding the required line breaks for clarity:
-
-Optimized Prompt for Quick Response:
-
-I want you to act as a webpage summarizer. Follow these steps to generate a very brief summary in HTML format:
-
-Analyze the Webpage: Identify the most important headlines or key ideas.
-
-Extract Core Information: Select 2 to 4 essential pieces of information that represent the main ideas.
-
-Format the Summary:
-
-Use <ul> for an unordered list.
-Use <li> for each title, and insert a <br> after each <li> for spacing.
-insert a <br> after each <li> for spacing
-Focus on Brevity: Keep the summary short and clear. Avoid unnecessary details.
-
-Strictly avoid using ```html in the response.
-
-Now, summarize the following webpage based on these steps.INPUT={content}""",safety_settings=None)
+    summary=model.generate_content(
+    f""""
+        Here's a tweaked version of your template prompt that focuses on brevity, ensuring a quick response and adding the required line breaks for clarity:
+        Optimized Prompt for Quick Response: I want you to act as a webpage summarizer. Follow these steps to generate a very brief summary in HTML format:
+        Analyze the Webpage: Identify the most important headlines or key ideas.Extract Core Information: Select 2 to 4 essential pieces of information that represent the main ideas.
+        Format the Summary:
+        Use <ul> for an unordered list.
+        Use <li> for each title, and insert a <br> after each <li> for spacing.
+        insert a <br> after each <li> for spacing
+        Focus on Brevity: Keep the summary short and clear. Avoid unnecessary details.
+        Strictly avoid using ```html in the response.
+        Now, summarize the following webpage based on these steps.INPUT={content}
+        """,safety_settings=None)
     print(summary.text)
     return summary.text

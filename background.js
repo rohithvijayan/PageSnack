@@ -5,11 +5,48 @@ function getPageContent(){
     return headings;
 }
 
+function getPageSelection(){
+    let text="";
+    if(window.getSelection){
+        text=window.getSelection();
+    }
+    else{
+        text="nothing!!";
+    }
+    return text.toString();
+}
+
+
+chrome.tabs.query({active:true,currentWindow:true},function(tabs){
+    chrome.scripting.executeScript({
+        target:{tabId:tabs[0].id},
+        function:getPageSelection,
+    },(results)=>{
+        const selectionDiv=document.getElementById("selection")
+        let selected_text=results[0].result;
+        console.log("selected Text: ",selected_text);
+        let selection=document.getElementById("selectedText");
+        selection.innerText="Selected :"+selected_text;
+        if (selected_text){ 
+            selectionDiv.style.display="block";
+        }
+        fetch('http://127.0.0.1:8000/api/home/',
+            {
+            method:'POST',
+            body:JSON.stringify({'selection':selected_text}),
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            })
+    })
+})
+
     chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
     chrome.scripting.executeScript({
         target: {tabId: tabs[0].id},
         function: getPageContent,
     }, (results) => {
+        console.log(results);
         const pageContent = results[0].result;
         fetch('http://127.0.0.1:8000/api/home/', {
         method: "POST",
